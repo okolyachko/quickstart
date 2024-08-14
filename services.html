@@ -85,9 +85,9 @@
                 tabContent.className = 'tab-content';
                 tabContent.innerHTML = `
                     <strong>Status:</strong> ${service.status} <br>
-                    <strong>Uptime:</strong> ${service.uptime} <br>
-                    <strong>Error Rate:</strong> ${service.errorRate} <br>
-                    <strong>Response Time:</strong> ${service.responseTime} <br>
+                    <strong>Uptime:</strong> ${service.uptime} % <br>
+                    <strong>Error Rate:</strong> ${service.errorRate} % <br>
+                    <strong>Response Time:</strong> ${service.responseTime} ms<br>
                     <strong>Last Check:</strong> ${new Date(service.lastCheck).toLocaleString()}
                 `;
 

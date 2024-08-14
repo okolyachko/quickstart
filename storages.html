@@ -69,8 +69,8 @@
                 tabContent.className = 'tab-content';
                 tabContent.innerHTML = `
                     <strong>Status:</strong> ${bucket.status} <br>
-                    <strong>Total Size:</strong> ${bucket.totalSize} <br>
-                    <strong>Used Size:</strong> ${bucket.usedSize} <br>
+                    <strong>Total Size:</strong> ${bucket.totalSize} GB <br>
+                    <strong>Used Size:</strong> ${bucket.usedSize} GB <br>
                     <strong>Object Count:</strong> ${bucket.objectCount} <br>
                     <strong>Last Modified:</strong> ${new Date(bucket.lastModified).toLocaleString()}
                 `;

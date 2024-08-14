@@ -69,9 +69,10 @@
                 tabContent.className = 'tab-content';
                 tabContent.innerHTML = `
                     <strong>Status:</strong> ${vm.status} <br>
-                    <strong>CPU Usage:</strong> ${vm.cpuUsage} <br>
-                    <strong>Memory Usage:</strong> ${vm.memoryUsage} <br>
-                    <strong>Disk Space:</strong> ${vm.diskSpace} <br>
+                    <strong>CPU Usage:</strong> ${vm.cpuUsage} % <br>
+                    <strong>Memory Usage:</strong> ${vm.memoryUsage} % <br>
+                    <strong>Disk Space Used:</strong> ${vm.diskSpaceUsed} GB <br>
+					<strong>Disk Space Total:</strong> ${vm.diskSpaceTotal} GB <br>
                     <strong>Last Boot Time:</strong> ${new Date(vm.lastBootTime).toLocaleString()}
                 `;
 
