@@ -1,0 +1,150 @@
+body {
+    font-family: Poppins, sans-serif;
+    background-color: #f5f5f5; /* Light grey background for contrast */
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Main Header */
+.main-header {
+    width: 100%;
+    height: 50px;
+    font-size: 24px;
+    font-weight: 500;
+    background-color: #ffffff; /* White background */
+    border-bottom: 1px solid #ccc; /* Light grey border */
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #173ead; /* Accent color for text */
+}
+
+/* Main Container */
+.main-container {
+    display: flex;
+}
+
+/* Sidebar */
+.main-sidebar {
+    width: 200px;
+    background-color: #ffffff; /* White background */
+    border-right: 1px solid #ddd; /* Light grey border */
+}
+
+/* Sidebar Links */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+li a {
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+li a:hover {
+    background-color: #173ead; /* Accent color on hover */
+    color: #ffffff; /* White text on hover */
+}
+
+/* Main Content */
+.main-content {
+    flex-grow: 1;
+    background-color: #ffffff; /* White background */
+}
+
+/* Iframe */
+iframe {
+    width: 100%;
+    height: 100vh;
+    border: none;
+}
+
+/* Sections */
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px;
+}
+
+/*Section Header */
+
+.section-name {
+	font-size: 18px;
+    font-weight: 500;
+	padding-bottom: 20px;
+}
+
+/* Tabs */
+.tab {
+    cursor: pointer;
+    padding: 10px;
+    background-color: #ffffff; /* White background */
+    border: 1px solid #ddd; /* Light grey border */
+    margin-bottom: 5px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #173ead; /* Accent color for text */
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.tab:hover {
+    background-color: #e9ecef; /* Light grey background on hover */
+    border-color: #173ead; /* Accent color border on hover */
+}
+
+/* Tab Content */
+.tab-content {
+    display: none;
+    padding: 10px;
+    border: 1px solid #ddd; /* Light grey border */
+    border-top: none;
+    background-color: #f9f9f9; /* Very light grey background */
+    border-radius: 4px;
+    color: #333; /* Default text color */
+}
+
+/* Active Tab Content */
+.active {
+    display: block;
+}
+
+/* Arrow */
+.arrow {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #173ead; /* Accent color arrow */
+    transition: transform 0.3s ease;
+    margin-right: 20px;
+}
+
+.arrow.rotate {
+    transform: rotate(180deg);
+}
+
+/* VM and Bucket Names */
+.vm-name, .bucket-name, .service-name {
+    flex-grow: 1;
+}
+
+/* Status Circle */
+.status-circle {
+    width: 12px; /* Slightly larger circle */
+    height: 12px;
+    border-radius: 50%;
+    background-color: #dc3545; /* Red for default color */
+    margin-left: 10px;
+}
+
+.status-circle.running, .status-circle.active, .status-circle.operational {
+    background-color: #28a745; /* Green for active status */
+}

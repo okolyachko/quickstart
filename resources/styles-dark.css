@@ -1,0 +1,132 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #2c3e50, #34495e); /* Semi-dark grey gradient */
+    color: #ecf0f1; /* Light text color for better contrast */
+    margin: 0;
+    padding: 0;
+}
+
+/* Main Header */
+.main-header {
+    width: 100%;
+    height: 50px;
+    font-size: 24px;
+    font-weight: 500;
+    background: linear-gradient(135deg, #2c3e50, #1a252f); /* Semi-dark grey gradient */
+    border-bottom: 1px solid #1a252f; /* Darker grey for the border */
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Main Container */
+.main-container {
+    display: flex;
+}
+
+/* Sidebar */
+.main-sidebar {
+    width: 200px;
+    background: linear-gradient(135deg, #1a252f, #2c3e50); /* Cobalt-inspired dark gradient */
+    border-right: 1px solid #1a252f; /* Darker grey for the border */
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+li a {
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #ecf0f1; /* Light text color */
+    transition: background-color 0.3s, color 0.3s;
+}
+
+li a:hover {
+    background-color: #1a252f; /* Darker shade for hover effect */
+    color: #2980b9; /* Cobalt blue for hover text color */
+}
+
+/* Main Content */
+.main-content {
+    flex-grow: 1;
+    background: #1a252f; /* Darker grey background */
+    padding: 20px;
+}
+
+/* Iframe */
+iframe {
+    width: 100%;
+    height: 100vh;
+    border: none;
+}
+
+/* Sections */
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px;
+}
+
+.tab {
+    cursor: pointer;
+    padding: 10px;
+    background: linear-gradient(135deg, #1a252f, #2c3e50); /* Dark gradient */
+    border: 1px solid #1a252f; /* Darker grey border */
+    margin-bottom: 5px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background-color 0.3s;
+}
+
+.tab:hover {
+    background: linear-gradient(135deg, #2c3e50, #34495e); /* Lighter dark gradient on hover */
+}
+
+.tab-content {
+    display: none;
+    padding: 10px;
+    border: 1px solid #1a252f; /* Dark grey border */
+    border-top: none;
+    background: #2c3e50; /* Darker background for content */
+    border-radius: 4px;
+}
+
+.active {
+    display: block;
+}
+
+.arrow {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #ecf0f1; /* Light text color for arrow */
+    transition: transform 0.3s ease;
+    margin-right: 20px;
+}
+
+.arrow.rotate {
+    transform: rotate(180deg);
+}
+
+.vm-name, .bucket-name {
+    flex-grow: 1;
+}
+
+.status-circle {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: red; /* Default color */
+    margin-left: 10px;
+}
+
+.status-circle.running, .status-circle.active {
+    background-color: #2980b9; /* Cobalt blue */
+}

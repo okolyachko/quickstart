@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services</title>
+    <link rel="stylesheet" href="resources/styles-light.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div class="container">
+	    <div class="section-name">Services</div>
+        <div id="service-tabs"></div>
+    </div>
+
+    <script>
+        // Define the URL of the Google Realtime Database
+        const databaseURL = "https://alan-ai-quickstart-default-rtdb.europe-west1.firebasedatabase.app//cloudServices.json";
+
+        // Define a globally available variable to store the fetched data
+        let services;
+
+        // Function to fetch data from the database using Axios
+        async function fetchData() {
+            try {
+                const response = await axios.get(databaseURL);
+                console.log(response.data); // Log the entire response
+                return response.data || []; // Ensure cloudServices is returned or default to empty array
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                return []; // Return an empty array in case of error
+            }
+        }
+
+        // Function to generate service tabs and content
+        function generateTabs(services) {
+            if (!Array.isArray(services)) {
+                console.error("Expected an array of services, but got:", services);
+                return;
+            }
+
+            const tabContainer = document.getElementById('service-tabs');
+            tabContainer.innerHTML = ''; // Clear existing content
+
+            services.forEach((service, index) => {
+                // Create tab button
+                const tabButton = document.createElement('div');
+                tabButton.className = 'tab';
+                
+                // Create arrow icon
+                const arrowIcon = document.createElement('div');
+                arrowIcon.className = 'arrow';
+                arrowIcon.id = `arrow-${index}`;
+
+                // Create service name
+                const serviceName = document.createElement('span');
+                serviceName.className = 'service-name';
+                serviceName.textContent = service.name;
+                
+                // Create status circle
+                const statusCircle = document.createElement('div');
+                statusCircle.className = 'status-circle';
+                switch (service.status) {
+                    case 'operational':
+                        statusCircle.classList.add('operational');
+                        break;
+                    case 'degraded':
+                        statusCircle.classList.add('degraded');
+                        break;
+                    case 'maintenance':
+                        statusCircle.classList.add('maintenance');
+                        break;
+                    default:
+                        statusCircle.classList.add('red'); // Default color if status is unknown
+                }
+                
+                // Append elements to tab button
+                tabButton.appendChild(arrowIcon);
+                tabButton.appendChild(serviceName);
+                tabButton.appendChild(statusCircle);
+                tabButton.onclick = () => toggleContent(index);
+
+                // Create tab content
+                const tabContent = document.createElement('div');
+                tabContent.className = 'tab-content';
+                tabContent.innerHTML = `
+                    <strong>Status:</strong> ${service.status} <br>
+                    <strong>Uptime:</strong> ${service.uptime} <br>
+                    <strong>Error Rate:</strong> ${service.errorRate} <br>
+                    <strong>Response Time:</strong> ${service.responseTime} <br>
+                    <strong>Last Check:</strong> ${new Date(service.lastCheck).toLocaleString()}
+                `;
+
+                // Append tab and content to container
+                tabContainer.appendChild(tabButton);
+                tabContainer.appendChild(tabContent);
+            });
+        }
+
+        // Function to toggle tab content
+        function toggleContent(index) {
+            const contents = document.querySelectorAll('.tab-content');
+            const arrows = document.querySelectorAll('.arrow');
+            contents.forEach((content, i) => {
+                if (i === index) {
+                    content.classList.toggle('active');
+                    arrows[i].classList.toggle('rotate');
+                } else {
+                    content.classList.remove('active');
+                    arrows[i].classList.remove('rotate');
+                }
+            });
+        }
+
+        // Generate tabs on page load
+        window.onload = async function() {
+            services = await fetchData();
+            generateTabs(services);
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buckets</title>
+    <link rel="stylesheet" href="resources/styles-light.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>   
+</head>
+<body>
+    <div class="container">
+        <div class="section-name">Buckets</div>
+        <div id="bucket-tabs"></div>
+    </div>
+
+    <script>
+        // Define the URL of the Google Realtime Database
+        const databaseURL = "https://alan-ai-quickstart-default-rtdb.europe-west1.firebasedatabase.app//storageBuckets.json";
+
+        // Define a globally available variable to store the fetched data
+        let buckets;
+
+        // Function to fetch data from the database using Axios
+        async function fetchData() {
+          try {
+            const response = await axios.get(databaseURL);
+            console.log(response.data);
+            return response.data; // Adjust according to your JSON structure
+          } catch (error) {
+            console.error("Error fetching data:", error);
+            return [];
+          }
+        }
+
+        // Function to generate bucket tabs and content
+        function generateTabs(buckets) {
+            const tabContainer = document.getElementById('bucket-tabs');
+
+            buckets.forEach((bucket, index) => {
+                // Create tab button
+                const tabButton = document.createElement('div');
+                tabButton.className = 'tab';
+                
+                // Create arrow icon
+                const arrowIcon = document.createElement('div');
+                arrowIcon.className = 'arrow';
+                arrowIcon.id = `arrow-${index}`;
+
+                // Create bucket name
+                const bucketName = document.createElement('span');
+                bucketName.className = 'bucket-name';
+                bucketName.textContent = bucket.name;
+                
+                // Create status circle
+                const statusCircle = document.createElement('div');
+                statusCircle.className = 'status-circle';
+                if (bucket.status === 'active') {
+                    statusCircle.classList.add('active');
+                }
+                
+                // Append elements to tab button
+                tabButton.appendChild(arrowIcon);
+                tabButton.appendChild(bucketName);
+                tabButton.appendChild(statusCircle);
+                tabButton.onclick = () => toggleContent(index);
+
+                // Create tab content
+                const tabContent = document.createElement('div');
+                tabContent.className = 'tab-content';
+                tabContent.innerHTML = `
+                    <strong>Status:</strong> ${bucket.status} <br>
+                    <strong>Total Size:</strong> ${bucket.totalSize} <br>
+                    <strong>Used Size:</strong> ${bucket.usedSize} <br>
+                    <strong>Object Count:</strong> ${bucket.objectCount} <br>
+                    <strong>Last Modified:</strong> ${new Date(bucket.lastModified).toLocaleString()}
+                `;
+
+                // Append tab and content to container
+                tabContainer.appendChild(tabButton);
+                tabContainer.appendChild(tabContent);
+            });
+        }
+
+        // Function to toggle tab content
+        function toggleContent(index) {
+            const contents = document.querySelectorAll('.tab-content');
+            const arrows = document.querySelectorAll('.arrow');
+            contents.forEach((content, i) => {
+                if (i === index) {
+                    content.classList.toggle('active');
+                    arrows[i].classList.toggle('rotate');
+                } else {
+                    content.classList.remove('active');
+                    arrows[i].classList.remove('rotate');
+                }
+            });
+        }
+
+        // Generate tabs on page load
+        window.onload = async function() {
+            buckets = await fetchData();
+            generateTabs(buckets);
+        };
+    </script>
+</body>
+</html>
