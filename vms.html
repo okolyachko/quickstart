@@ -49,6 +49,7 @@
                 // Create VM name
                 const vmName = document.createElement('span');
                 vmName.className = 'vm-name';
+				vmName.id = `vm-${vm.name}`;
                 vmName.textContent = vm.name;
                 
                 // Create status circle
