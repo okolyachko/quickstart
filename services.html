@@ -5,20 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Services</title>
     <link rel="stylesheet" href="resources/styles-light.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
-    <div class="container">
-	    <div class="section-name">Services</div>
-        <div id="service-tabs"></div>
+    <div class="main-header">Alan AI Quickstart: Cloud Portal</div>
+    <div class="main-container">
+        <div class="main-sidebar">
+            <ul>
+                <li><a href="index.html" id="vm-button">VMs</a></li>
+                <li><a href="storages.html" id="buckets-button">Buckets</a></li>
+                <li><a href="services.html" id="services-button">Services</a></li>
+            </ul>
+        </div>
+        <div class="main-content" id="content">
+            <div class="container" id="services">
+                <div class="section-name">Services</div>
+                <div id="service-tabs"></div>
+            </div>
+        </div>
     </div>
+    <div class="alan-btn"></div>
 
+    <script type="text/javascript" src="https://v1.alan.app/web/lib/alan_lib.min.js"></script>
     <script>
+        var alanBtnInstance = alanBtn({
+            key: "ead13675c15d603c753f233fc7dff7d62e956eca572e1d8b807a3e2338fdd0dc/stage",
+            host: "v1.alan.app",
+            onCommand: function (commandData) {
+                if (commandData.command === "go:back") {
+                    // Call client code that will react to the received command
+                }
+            },
+            rootEl: document.getElementById("alan-btn"),
+        });
+
         // Define the URL of the Google Realtime Database
         const databaseURL = "https://alan-ai-quickstart-default-rtdb.europe-west1.firebasedatabase.app//cloudServices.json";
-
-        // Define a globally available variable to store the fetched data
-        let services;
 
         // Function to fetch data from the database using Axios
         async function fetchData() {
@@ -114,7 +137,7 @@
 
         // Generate tabs on page load
         window.onload = async function() {
-            services = await fetchData();
+            const services = await fetchData();
             generateTabs(services);
         };
     </script>

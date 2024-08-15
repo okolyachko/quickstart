@@ -5,22 +5,116 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cloud Portal</title>
   <link rel="stylesheet" href="resources/styles-light.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
   <div class="main-header">Alan AI Quickstart: Cloud Portal</div>
   <div class="main-container">
     <div class="main-sidebar">
       <ul>
-        <li><a href="vms.html" target="content">VMs</a></li>
-        <li><a href="storages.html" target="content">Buckets</a></li>
-        <li><a href="services.html" target="content">Services</a></li>
+        <li><a href="index.html" id="vm-button">VMs</a></li>
+        <li><a href="storages.html" id="buckets-button">Buckets</a></li>
+        <li><a href="services.html" id="services-button">Services</a></li>
       </ul>
     </div>
-    <div class="main-content">
-      <iframe src="vms.html" name="content" frameborder="0"></iframe>
+    <div class="main-content" id="content">
+      <div class="container" id="vms">
+        <div class="section-name">Virtual Machines</div>
+        <div id="vm-tabs"></div>
+      </div>
+      <!-- Content for buckets and services can be added here in similar div blocks -->
     </div>
   </div>
+  <div class="alan-btn"></div>
+  <script type="text/javascript"
+ src="https://v1.alan.app/web/lib/alan_lib.min.js"></script>
+ <script>
+  var alanBtnInstance = alanBtn({
+    key: "ead13675c15d603c753f233fc7dff7d62e956eca572e1d8b807a3e2338fdd0dc/stage",
+    host: "v1.alan.app",
+    onCommand: function (commandData) {
+      if (commandData.command === "go:back") {
+        //call client code that will react on the received command
+      }
+    },
+    rootEl: document.getElementById("alan-btn"),
+  });
+
+    const databaseURL = "https://alan-ai-quickstart-default-rtdb.europe-west1.firebasedatabase.app//virtualMachines.json";
+
+    async function fetchData() {
+      try {
+        const response = await axios.get(databaseURL);
+        console.log(response.data);
+        return response.data;
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        return null;
+      }
+    }
+
+    function generateTabs(vms) {
+      const tabContainer = document.getElementById('vm-tabs');
+
+      vms.forEach((vm, index) => {
+        const tabButton = document.createElement('div');
+        tabButton.className = 'tab';
+        
+        const arrowIcon = document.createElement('div');
+        arrowIcon.className = 'arrow';
+        arrowIcon.id = `arrow-${index}`;
+
+        const vmName = document.createElement('span');
+        vmName.className = 'vm-name';
+        vmName.id = `${vm.id}`;
+        vmName.textContent = vm.name;
+        
+        const statusCircle = document.createElement('div');
+        statusCircle.className = 'status-circle';
+        if (vm.status === 'running') {
+          statusCircle.classList.add('running');
+        }
+        
+        tabButton.appendChild(arrowIcon);
+        tabButton.appendChild(vmName);
+        tabButton.appendChild(statusCircle);
+        tabButton.onclick = () => toggleContent(index);
+
+        const tabContent = document.createElement('div');
+        tabContent.className = 'tab-content';
+        tabContent.innerHTML = `
+          <strong>Status:</strong> ${vm.status} <br>
+          <strong>CPU Usage:</strong> ${vm.cpuUsage} % <br>
+          <strong>Memory Usage:</strong> ${vm.memoryUsage} % <br>
+          <strong>Disk Space Used:</strong> ${vm.diskSpaceUsed} GB <br>
+          <strong>Disk Space Total:</strong> ${vm.diskSpaceTotal} GB <br>
+          <strong>Last Boot Time:</strong> ${new Date(vm.lastBootTime).toLocaleString()}
+        `;
+
+        tabContainer.appendChild(tabButton);
+        tabContainer.appendChild(tabContent);
+      });
+    }
+
+    function toggleContent(index) {
+      const contents = document.querySelectorAll('.tab-content');
+      const arrows = document.querySelectorAll('.arrow');
+      contents.forEach((content, i) => {
+        if (i === index) {
+          content.classList.toggle('active');
+          arrows[i].classList.toggle('rotate');
+        } else {
+          content.classList.remove('active');
+          arrows[i].classList.remove('rotate');
+        }
+      });
+    }
+
+    window.onload = async function() {
+      const vms = await fetchData();
+      generateTabs(vms);
+    };
+  </script>
 </body>
-
-
 </html>
