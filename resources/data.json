@@ -1,0 +1,148 @@
+{
+  "virtualMachines": [
+    {
+      "id": "vm-frontend-01",
+      "name": "frontend-web-01",
+      "status": "running",
+      "cpuUsage": 45,
+      "memoryUsage": 60,
+      "diskSpaceUsed": 150,
+      "diskSpaceTotal": 500,
+      "lastBootTime": "2024-08-10T08:30:00Z"
+    },
+    {
+      "id": "vm-db-01",
+      "name": "database-primary-01",
+      "status": "stopped",
+      "cpuUsage": "0",
+      "memoryUsage": "0",
+      "diskSpaceUsed": 200,
+      "diskSpaceTotal": 200,
+      "lastBootTime": "2024-07-15T09:00:00Z"
+    },
+    {
+      "id": "vm-app-01",
+      "name": "application-server-01",
+      "status": "running",
+      "cpuUsage": 30,
+      "memoryUsage": 55,
+      "diskSpaceUsed": 80,
+      "diskSpaceTotal": 250,
+      "lastBootTime": "2024-08-12T10:00:00Z"
+    },
+    {
+      "id": "vm-backup-01",
+      "name": "backup-server-01",
+      "status": "running",
+      "cpuUsage": 20,
+      "memoryUsage": 40,
+      "diskSpaceUsed": 500,
+      "diskSpaceTotal": 500,
+      "lastBootTime": "2024-08-01T07:00:00Z"
+    },
+    {
+      "id": "vm-monitor-01",
+      "name": "monitoring-node-01",
+      "status": "running",
+      "cpuUsage": 50,
+      "memoryUsage": 70,
+      "diskSpaceUsed": 300,
+      "diskSpaceTotal": 1000,
+      "lastBootTime": "2024-08-05T11:00:00Z"
+    }
+  ],
+  "storageBuckets": [
+    {
+      "id": "bucket-user-data",
+      "name": "user-data-bucket",
+      "status": "active",
+      "totalSize": 1000,
+      "usedSize": 500,
+      "objectCount": 15000,
+      "lastModified": "2024-08-13T12:00:00Z"
+    },
+    {
+      "id": "bucket-logs",
+      "name": "logs-storage",
+      "status": "active",
+      "totalSize": 500,
+      "usedSize": 350,
+      "objectCount": 8000,
+      "lastModified": "2024-08-12T15:00:00Z"
+    },
+    {
+      "id": "bucket-backups",
+      "name": "backup-bucket",
+      "status": "inactive",
+      "totalSize": 2000,
+      "usedSize": 1000,
+      "objectCount": 2000,
+      "lastModified": "2024-07-30T14:00:00Z"
+    },
+    {
+      "id": "bucket-media",
+      "name": "media-files-bucket",
+      "status": "active",
+      "totalSize": 750,
+      "usedSize": 600,
+      "objectCount": 3000,
+      "lastModified": "2024-08-11T09:00:00Z"
+    },
+    {
+      "id": "bucket-temp",
+      "name": "temporary-storage",
+      "status": "active",
+      "totalSize": 200,
+      "usedSize": 150,
+      "objectCount": 500,
+      "lastModified": "2024-08-13T08:00:00Z"
+    }
+  ],
+  "cloudServices": [
+    {
+      "id": "service-api-gateway",
+      "name": "API Gateway",
+      "status": "operational",
+      "uptime": 99.9,
+      "errorRate": 0.01,
+      "responseTime": 120,
+      "lastCheck": "2024-08-13T10:00:00Z"
+    },
+    {
+      "id": "service-auth",
+      "name": "Authentication Service",
+      "status": "operational",
+      "uptime": 99.8,
+      "errorRate": 0.02,
+      "responseTime": 95,
+      "lastCheck": "2024-08-13T10:15:00Z"
+    },
+    {
+      "id": "service-db",
+      "name": "Database Service",
+      "status": "degraded",
+      "uptime": 98.5,
+      "errorRate": 0.05,
+      "responseTime": 250,
+      "lastCheck": "2024-08-13T10:30:00Z"
+    },
+    {
+      "id": "service-email",
+      "name": "Email Service",
+      "status": "operational",
+      "uptime": 99.7,
+      "errorRate": 0.03,
+      "responseTime": 110,
+      "lastCheck": "2024-08-13T10:45:00Z"
+    },
+    {
+      "id": "service-monitoring",
+      "name": "Monitoring Service",
+      "status": "operational",
+      "uptime": 100,
+      "errorRate": 0.00,
+      "responseTime": 80,
+      "lastCheck": "2024-08-13T11:00:00Z"
+    }
+  ]
+}

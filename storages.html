@@ -29,16 +29,7 @@
 
     <script type="text/javascript" src="https://v1.alan.app/web/lib/alan_lib.min.js"></script>
     <script>
-        var alanBtnInstance = alanBtn({
-            key: "ead13675c15d603c753f233fc7dff7d62e956eca572e1d8b807a3e2338fdd0dc/stage",
-            host: "v1.alan.app",
-            onCommand: function (commandData) {
-                if (commandData.command === "go:back") {
-                    // Call client code that will react to the received command
-                }
-            },
-            rootEl: document.getElementById("alan-btn"),
-        });
+        
 
         // Define the URL of the Google Realtime Database
         const databaseURL = "https://alan-ai-quickstart-default-rtdb.europe-west1.firebasedatabase.app//storageBuckets.json";
